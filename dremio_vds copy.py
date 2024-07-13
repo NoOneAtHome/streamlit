@@ -81,18 +81,18 @@ else:
 
         else:
             df = pd.DataFrame.from_dict(result, orient="index")
-            ffolder_df = df[
+            folder_df = df[
                 (df["type"] == "CONTAINER") & (df["containerType"] == "FOLDER")
             ]
             dataset_df = df[df["type"] == "DATASET"]
             function_df = df[df["containerType"] == "FUNCTION"]
 
-    except KeyError:
+    except KeyError as e:
         data = [[result["id"], result["path"]]]
         folder_on_select = "ignore"
         folder_df = pd.DataFrame(data, columns=["id", "path"])
         dataset_df = pd.DataFrame()
-        # function_df = df[df["type"] == "FUNCTION"]
+        function_df = pd.DataFrame()
 
 st.header("Folders")
 response = st.dataframe(
